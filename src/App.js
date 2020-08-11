@@ -2,6 +2,7 @@ import React, { Fragment, useState } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Producto from "./components/Producto";
+import Carrito from "./components/Carrito";
 
 function App() {
   //Crear listado de productos
@@ -12,6 +13,10 @@ function App() {
     { id: 3, nombre: "Camisa Nodejs", precio: 30 },
     { id: 4, nombre: "Camisa Angular", precio: 20 },
   ]);
+
+  //State para un carrito de compras
+
+  const [carrito, agregarProducto] = useState([]);
 
   //Variable para la fecha y mandarla por props a Footer
   const fecha = new Date().getFullYear();
@@ -24,11 +29,17 @@ function App() {
 
       {productos.map((producto) => (
         <Producto
-        
-        key= {producto.id}
-        producto={producto} />
-
+          key={producto.id}
+          producto={producto}
+          carrito={carrito}
+          agregarProducto={agregarProducto}
+          productos={productos}
+        />
       ))}
+
+      <Carrito carrito={carrito} 
+               agregarProducto={agregarProducto}
+      />
 
       <Footer fecha={fecha} />
     </Fragment>
